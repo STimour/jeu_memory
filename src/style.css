@@ -1,20 +1,9 @@
-h1{
+body{
   text-align: center;
+  background: wheat;
 }
-
-#container{
+#mainDiv{
+  background: gray;
+  width: 80%;
   margin: auto;
-  max-width: 70%;
 }
-
-
-#app{
-  margin: 20px;
-  padding: 50px;
-  background: grey;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.
