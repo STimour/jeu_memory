@@ -35,6 +35,7 @@ function init(){
         tile.setAttribute("class", "tile")
         tile.style.width ="50px"
         tile.style.height = "50px"
+        tile.style.margin = "20px"
         tile.style.backgroundColor = colors[Math.floor(i/2)]
         return tile
     })
