@@ -11,9 +11,31 @@ body{
 
 
 /*ANCHOR - card */
-//.tile{
-//  width: 50px;
-//  height: 50px;
-//  margin: 20px;
-//  border: 1px solid black
-//}
+.red{
+  background: #f50808;
+} 
+.blue{
+  background:  #002efe;
+}
+.green{
+  background: #64fe00;
+}
+.yellow{
+  background: #fefb00;
+}
+.orange{
+  background: #FF5733;
+} 
+.purple{
+  background:  #fe00e7;
+} 
+.pink{
+  background: #f978a5;
+} 
+.brown{
+  background: #6e2c00;
+}
+
+.not-revealed{
+  background: #eee;
+}
