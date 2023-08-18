@@ -46,14 +46,15 @@ const jeuDiv = document.createElement('div') as HTMLDivElement;
 //ANCHOR - Victoire - La div qui apparait en remplaçant jeuDiv une fois le jeu terminé + fonction
 const victoire = document.createElement("div") as HTMLDivElement
     victoire.setAttribute("id", "victoire")
-    jeuDiv.setAttribute("class", "argent")
+    victoire.setAttribute("class", "argent")
 function victoireFunc() {
     jeuDiv.remove()
+    remiseBtnStart.remove()
     app.appendChild(victoire)
     victoire.innerHTML = `
         <h1>Bravo!</h1>
         <h2>Vous avez gagné</h2>
-        <p>Vous avez fait ${nbCoups/2} de coups pour gagner.</p>
+        <p>Vous avez fait ${nbCoups} coups pour gagner.</p>
         <p>Vous avez joué ${nb_jeu} fois.</p>
         
         `
@@ -102,12 +103,15 @@ function init() {
 
     let carreChoisi = null;
     let propCol = null;
-
+    let count = 0;
     
 // Ajout de l'ecouteur d'evenement click aux tiles
     elements.forEach((element, i) => {
         element.addEventListener("click", () => {
-            nbCoups++
+            count++
+            if(count%2 === 0){
+                nbCoups++
+            }
             console.log(nbCoups)
             if (element.classList.contains("not-revealed")) {
                 element.classList.remove("not-revealed");
