@@ -22,6 +22,7 @@ const newBtnStart = document.createElement("button") as HTMLButtonElement;
     newBtnStart.addEventListener("click", () => {
     init();
 });
+
 //ANCHOR - Troisième btn pour recommencer le jeu;
 const remiseBtnStart = document.createElement("button") as HTMLButtonElement;
     remiseBtnStart.textContent = "Récommencer le jeu";
@@ -91,6 +92,7 @@ function init() {
     tiles.forEach(tile => jeuDiv.appendChild(tile));
 
 
+// On selection les tiles pour boucler dessus
     let nodeList = document.querySelectorAll(".tile");
     let elements = Array.from(nodeList);
 
@@ -98,9 +100,8 @@ function init() {
     let propCol = null;
 
     
-
+// Ajout de l'ecouteur d'evenement click aux tiles
     elements.forEach((element, i) => {
-   
         element.addEventListener("click", () => {
             nbCoups++
             console.log(nbCoups)
@@ -126,6 +127,7 @@ function init() {
                 }
            
             } 
+            // vérification de la condition de victoire(toute les tiles ne doivent plus avec not-revealed)
             const win = elements.every(tile => !tile.classList.contains("not-revealed"));
             if (win) {
                 console.log("Toutes les tuiles ont été révélées !");
