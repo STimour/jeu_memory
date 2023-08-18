@@ -31,7 +31,9 @@ button{
   margin: auto;
   width: 50%;
   background-color: #C0C0C0;
-  text-align: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  border-radius: 10px
 }
 
 /*ANCHOR - card */

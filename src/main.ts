@@ -11,6 +11,7 @@ const app = document.querySelector("#app")
 const btnStart = document.createElement('button') as HTMLButtonElement; 
     btnStart.textContent = "Commencer la partie";
     btnStart.addEventListener("click", () => {
+        nbCoups = 0
         init()
     });
 
@@ -20,6 +21,7 @@ const btnStart = document.createElement('button') as HTMLButtonElement;
 const newBtnStart = document.createElement("button") as HTMLButtonElement;
     newBtnStart.textContent = "Faire une nouvelle partie";
     newBtnStart.addEventListener("click", () => {
+    nbCoups = 0
     init();
 });
 
@@ -28,6 +30,7 @@ const remiseBtnStart = document.createElement("button") as HTMLButtonElement;
     remiseBtnStart.textContent = "Récommencer le jeu";
     remiseBtnStart.addEventListener("click", () => {
     nb_remise++
+    nbCoups = 0
     init();
 });
 
@@ -38,19 +41,19 @@ const jeuDiv = document.createElement('div') as HTMLDivElement;
     jeuDiv.style.width = "450px"
     jeuDiv.style.margin = "auto auto 30px auto"
     jeuDiv.style.display = "flex"
-    jeuDiv.style.backgroundColor = "#007AFF"
     jeuDiv.style.border = "1px solid black"
 
 //ANCHOR - Victoire - La div qui apparait en remplaçant jeuDiv une fois le jeu terminé + fonction
 const victoire = document.createElement("div") as HTMLDivElement
     victoire.setAttribute("id", "victoire")
+    jeuDiv.setAttribute("class", "argent")
 function victoireFunc() {
     jeuDiv.remove()
     app.appendChild(victoire)
     victoire.innerHTML = `
         <h1>Bravo!</h1>
         <h2>Vous avez gagné</h2>
-        <p>Vous avez fait ${nbCoups} de coups pour gagner.</p>
+        <p>Vous avez fait ${nbCoups/2} de coups pour gagner.</p>
         <p>Vous avez joué ${nb_jeu} fois.</p>
         
         `
