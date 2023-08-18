@@ -34,10 +34,11 @@ const remiseBtnStart = document.createElement("button") as HTMLButtonElement;
 //ANCHOR - La div qui contient le jeu
 const jeuDiv = document.createElement('div') as HTMLDivElement;
     jeuDiv.setAttribute("id", "jeuDiv")
+    jeuDiv.setAttribute("class", "argent")
     jeuDiv.style.width = "450px"
-    jeuDiv.style.margin = "auto"
+    jeuDiv.style.margin = "auto auto 30px auto"
     jeuDiv.style.display = "flex"
-    jeuDiv.style.backgroundColor = "#C0C0C0"
+    jeuDiv.style.backgroundColor = "#007AFF"
     jeuDiv.style.border = "1px solid black"
 
 //ANCHOR - Victoire - La div qui apparait en remplaçant jeuDiv une fois le jeu terminé + fonction
