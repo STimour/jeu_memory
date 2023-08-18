@@ -2,13 +2,17 @@ body{
   text-align: center;
   background: wheat;
 }
-#mainDiv{
+#jeuDiv{
   flex-wrap: wrap;
   justify-content: space-between;
 }
-
-
-
+#victoire{
+  padding: 10px;
+  margin: auto;
+  width: 50%;
+  background-color: #7b7575;
+  text-align: center;
+}
 
 /*ANCHOR - card */
 .red{

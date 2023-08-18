@@ -1,37 +1,73 @@
 const colors = ["red", "blue", "green", "yellow", "orange", "purple", "pink", "brown"];
 let nbCoups = 0;
+let nb_jeu = 0;
+let time = 500;
+let nb_remise = 0;
 
-const mainDiv = document.createElement('div') as HTMLDivElement;
-    mainDiv.setAttribute("id", "mainDiv")
-    mainDiv.style.width = "50%"
-    mainDiv.style.margin = "auto"
-    mainDiv.style.display = "flex"
-    mainDiv.style.backgroundColor = "gray"
-    mainDiv.style.border = "1px solid black"
+//ANCHOR - la selection de la div principal
+const app = document.querySelector("#app")
 
-const btnStart = document.querySelector("#init-button") as HTMLButtonElement;
-btnStart.addEventListener("click", () => {
-    init()
+// ANCHOR - Premier Button(commencer le jeu)
+const btnStart = document.createElement('button') as HTMLButtonElement; 
+    btnStart.textContent = "Commencer la partie";
+    btnStart.addEventListener("click", () => {
+        init()
+    });
+
+    app.appendChild(btnStart);
+
+// ANCHOR - Deuxieme Button(recommencer le jeu)
+const newBtnStart = document.createElement("button") as HTMLButtonElement;
+    newBtnStart.textContent = "Faire une nouvelle partie";
+    newBtnStart.addEventListener("click", () => {
+    init();
+});
+//ANCHOR - Troisième btn pour recommencer le jeu;
+const remiseBtnStart = document.createElement("button") as HTMLButtonElement;
+    remiseBtnStart.textContent = "Récommencer le jeu";
+    remiseBtnStart.addEventListener("click", () => {
+    nb_remise++
+    init();
 });
 
-let nb_jeu = 0;
+//ANCHOR - La div qui contient le jeu
+const jeuDiv = document.createElement('div') as HTMLDivElement;
+    jeuDiv.setAttribute("id", "jeuDiv")
+    jeuDiv.style.width = "50%"
+    jeuDiv.style.margin = "auto"
+    jeuDiv.style.display = "flex"
+    jeuDiv.style.backgroundColor = "gray"
+    jeuDiv.style.border = "1px solid black"
 
+//ANCHOR - Victoire - La div qui apparait en remplaçant jeuDiv une fois le jeu terminé + fonction
+const victoire = document.createElement("div") as HTMLDivElement
+    victoire.setAttribute("id", "victoire")
+function victoireFunc() {
+    jeuDiv.remove()
+    app.appendChild(victoire)
+    victoire.innerHTML = `
+        <h1>Bravo!</h1>
+        <h2>Vous avez gagné</h2>
+        <p>Vous avez fait ${nbCoups} de coups pour gagner.</p>
+        <p>Vous avez joué ${nb_jeu} fois.</p>
+        
+        `
+    victoire.appendChild(newBtnStart)
+}
 
+// ANCHOR - Fonction qui réinitialise le jeu
 function init() {
     console.log('init');
+    console.log(time);
     btnStart.remove();
-    nbCoups = 0;
-    nb_jeu++;
-    container.innerHTML = `
-        <button id="init-button">Nouveau Click</button>
-        <p>nombre de tour:${nb_jeu}</p>
-        <p>nombre de tour:${nbCoups}</p>
-     
-    `;
+    app.innerHTML = `
+        <p>Vous avez recommencé le jeu:${nb_remise} fois</p>
+    `
     
-    container.appendChild(mainDiv);
+    app.appendChild(jeuDiv);
+    app.appendChild(remiseBtnStart)
 
-    // Create new tiles for this round
+// ANCHOR - Creation des carte avec des couleur
     const tiles = new Array(16).fill('').map((_, i) => {
         const tile = document.createElement("div");
         tile.setAttribute("class", "tile not-revealed");
@@ -48,17 +84,11 @@ function init() {
     // Shuffle the new tiles
     tiles.sort(() => Math.random() - 0.5);
     
-    // Clear previous tiles in mainDiv
-    mainDiv.innerHTML = '';
+    // Clear previous tiles in jeuDiv
+    jeuDiv.innerHTML = '';
     
-    // Add the new tiles to mainDiv
-    tiles.forEach(tile => mainDiv.appendChild(tile));
-    
-    // Add an event listener
-    const newBtnStart = document.querySelector("#init-button") as HTMLButtonElement;
-    newBtnStart.addEventListener("click", () => {
-        init();
-    });
+    // Add the new tiles to jeuDiv
+    tiles.forEach(tile => jeuDiv.appendChild(tile));
 
 
     let nodeList = document.querySelectorAll(".tile");
@@ -67,11 +97,13 @@ function init() {
     let carreChoisi = null;
     let propCol = null;
 
-    let revealed = true;
     
+
     elements.forEach((element, i) => {
+   
         element.addEventListener("click", () => {
-            nbCoups++;
+            nbCoups++
+            console.log(nbCoups)
             if (element.classList.contains("not-revealed")) {
                 element.classList.remove("not-revealed");
                 if (!carreChoisi) {
@@ -88,12 +120,21 @@ function init() {
                             element.classList.add("not-revealed");
                             carreChoisi = null;
                             propCol = null;
-                        }, 500);
+                            
+                        }, time);
                     }
                 }
-            } else {
-                console.log("eeee")
-            }
+           
+            } 
+            const win = elements.every(tile => !tile.classList.contains("not-revealed"));
+            if (win) {
+                console.log("Toutes les tuiles ont été révélées !");
+                if(time > 100){
+                time-=25;
+                }
+                nb_jeu++;
+                victoireFunc();
+            } 
         });
         
     });
