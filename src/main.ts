@@ -72,7 +72,7 @@ function init() {
 // ANCHOR - Creation des carte avec des couleur
     const tiles = new Array(16).fill('').map((_, i) => {
         const tile = document.createElement("div");
-        tile.setAttribute("class", "tile not-revealed");
+        tile.setAttribute("class", "tile not-revealed neon-background--tile");
         tile.setAttribute("color", colors[Math.floor(i / 2)])
         tile.style.width = "50px";
         tile.style.height = "50px";
