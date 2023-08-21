@@ -21,6 +21,10 @@ button{
   color: #C0C0C0;
   font-weight: bold;
 }
+#app{
+  height: 100vh;
+  margin-bottom: 50px;
+}
 #jeuDiv{
   flex-wrap: wrap;
   justify-content: center;
